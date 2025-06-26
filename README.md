@@ -4,6 +4,11 @@
 
 ```
 
+### 2. for Streamlit
+* consulting 조회 및 상세페이지
+* client 조회 및 상세페이지
+* 일일 리포트
+* Superset 연동
 
 
 # 참고: 본진 Repo Wiki 
