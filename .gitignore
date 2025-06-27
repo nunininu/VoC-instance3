@@ -36,5 +36,8 @@ Thumbs.db
 dist/
 build/
 
+# bz2 삭제
+ML-keyword-network/voc_local_analysis/*.bz2
+
 # Superset export 등 정적 HTML은 직접 지정
 # (예: complaint_word_network.html 등은 수동 관리)
