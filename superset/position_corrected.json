@@ -1,0 +1,247 @@
+{
+  "CHART-121": {
+    "type": "CHART",
+    "id": "CHART-121",
+    "children": [],
+    "meta": {
+      "chartId": 121,
+      "width": 4,
+      "height": 50,
+      "sliceName": "client_gender"
+    }
+  },
+  "CHART-123": {
+    "type": "CHART",
+    "id": "CHART-123",
+    "children": [],
+    "meta": {
+      "chartId": 123,
+      "width": 4,
+      "height": 50,
+      "sliceName": "client_gender*age"
+    }
+  },
+  "CHART-125": {
+    "type": "CHART",
+    "id": "CHART-125",
+    "children": [],
+    "meta": {
+      "chartId": 125,
+      "width": 4,
+      "height": 50,
+      "sliceName": "client_age"
+    }
+  },
+  "CHART-126": {
+    "type": "CHART",
+    "id": "CHART-126",
+    "children": [],
+    "meta": {
+      "chartId": 126,
+      "width": 4,
+      "height": 50,
+      "sliceName": "consulting_category"
+    }
+  },
+  "CHART-127": {
+    "type": "CHART",
+    "id": "CHART-127",
+    "children": [],
+    "meta": {
+      "chartId": 127,
+      "width": 4,
+      "height": 50,
+      "sliceName": "Clients_count"
+    }
+  },
+  "CHART-128": {
+    "type": "CHART",
+    "id": "CHART-128",
+    "children": [],
+    "meta": {
+      "chartId": 128,
+      "width": 4,
+      "height": 50,
+      "sliceName": "Consulting_count"
+    }
+  },
+  "CHART-129": {
+    "type": "CHART",
+    "id": "CHART-129",
+    "children": [],
+    "meta": {
+      "chartId": 129,
+      "width": 4,
+      "height": 50,
+      "sliceName": "Category_count"
+    }
+  },
+  "CHART-132": {
+    "type": "CHART",
+    "id": "CHART-132",
+    "children": [],
+    "meta": {
+      "chartId": 132,
+      "width": 4,
+      "height": 50,
+      "sliceName": "consulting_gender"
+    }
+  },
+  "CHART-133": {
+    "type": "CHART",
+    "id": "CHART-133",
+    "children": [],
+    "meta": {
+      "chartId": 133,
+      "width": 4,
+      "height": 50,
+      "sliceName": "counsulting_age"
+    }
+  },
+  "CHART-134": {
+    "type": "CHART",
+    "id": "CHART-134",
+    "children": [],
+    "meta": {
+      "chartId": 134,
+      "width": 4,
+      "height": 50,
+      "sliceName": "consulting_gender*age"
+    }
+  },
+  "CHART-137": {
+    "type": "CHART",
+    "id": "CHART-137",
+    "children": [],
+    "meta": {
+      "chartId": 138,
+      "width": 4,
+      "height": 50,
+      "sliceName": "word_top5_male"
+    }
+  },
+  "CHART-138": {
+    "type": "CHART",
+    "id": "CHART-138",
+    "children": [],
+    "meta": {
+      "chartId": 140,
+      "width": 4,
+      "height": 50,
+      "sliceName": "word_top5_female"
+    }
+  },
+  "CHART-139": {
+    "type": "CHART",
+    "id": "CHART-139",
+    "children": [],
+    "meta": {
+      "chartId": 139,
+      "width": 4,
+      "height": 50,
+      "sliceName": "word_top5_age_10s"
+    }
+  },
+  "CHART-140": {
+    "type": "CHART",
+    "id": "CHART-140",
+    "children": [],
+    "meta": {
+      "chartId": 141,
+      "width": 4,
+      "height": 50,
+      "sliceName": "word_top5_age_20s"
+    }
+  },
+  "CHART-141": {
+    "type": "CHART",
+    "id": "CHART-141",
+    "children": [],
+    "meta": {
+      "chartId": 142,
+      "width": 4,
+      "height": 50,
+      "sliceName": "word_top5_age_30s"
+    }
+  },
+  "CHART-142": {
+    "type": "CHART",
+    "id": "CHART-142",
+    "children": [],
+    "meta": {
+      "chartId": 143,
+      "width": 4,
+      "height": 50,
+      "sliceName": "word_top5_age_50s"
+    }
+  },
+  "CHART-143": {
+    "type": "CHART",
+    "id": "CHART-143",
+    "children": [],
+    "meta": {
+      "chartId": 145,
+      "width": 4,
+      "height": 50,
+      "sliceName": "word_top5_age_60s"
+    }
+  },
+  "CHART-144": {
+    "type": "CHART",
+    "id": "CHART-144",
+    "children": [],
+    "meta": {
+      "chartId": 144,
+      "width": 4,
+      "height": 50,
+      "sliceName": "word_top5_age_40s"
+    }
+  },
+  "CHART-145": {
+    "type": "CHART",
+    "id": "CHART-145",
+    "children": [],
+    "meta": {
+      "chartId": 136,
+      "width": 4,
+      "height": 50,
+      "sliceName": "Channel_count"
+    }
+  },
+  "ROOT_ID": {
+    "type": "ROOT",
+    "id": "ROOT_ID",
+    "children": [
+      "GRID_ID"
+    ]
+  },
+  "GRID_ID": {
+    "type": "GRID",
+    "id": "GRID_ID",
+    "children": [
+      "CHART-121",
+      "CHART-123",
+      "CHART-125",
+      "CHART-126",
+      "CHART-127",
+      "CHART-128",
+      "CHART-129",
+      "CHART-132",
+      "CHART-133",
+      "CHART-134",
+      "CHART-137",
+      "CHART-138",
+      "CHART-139",
+      "CHART-140",
+      "CHART-141",
+      "CHART-142",
+      "CHART-143",
+      "CHART-144",
+      "CHART-145"
+    ],
+    "parents": [
+      "ROOT_ID"
+    ]
+  },
+  "VERSION_KEY": "v2"
+}
