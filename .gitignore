@@ -1,1 +1,40 @@
 *.swp
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PDM virtual environment (if in-project)
+.venv/
+
+# PDM generated files
+.pdm-python
+.python-version
+
+# VSCode 설정 파일 (선택)
+.vscode/
+
+# OS별 무시 파일
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# 환경 파일 (보안상 무시)
+.env
+.env.*
+
+# Jupyter Notebook 체크포인트
+.ipynb_checkpoints/
+
+# 압축 파일 등 결과물
+*.zip
+*.tar.gz
+*.egg-info/
+dist/
+build/
+
+# Superset export 등 정적 HTML은 직접 지정
+# (예: complaint_word_network.html 등은 수동 관리)
