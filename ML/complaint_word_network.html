@@ -1,0 +1,127 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 100%;
+                 height: 800px;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#ff4444", "font": {"color": "white"}, "id": "\ubd88\ub9cc", "label": "\ubd88\ub9cc", "shape": "dot", "size": 30, "title": "\uce74\ud14c\uace0\ub9ac: negative\u003cbr\u003e\ub2e8\uc5b4: \ubd88\ub9cc"}, {"color": "#ff4444", "font": {"color": "white"}, "id": "\ubb38\uc81c", "label": "\ubb38\uc81c", "shape": "dot", "size": 25, "title": "\uce74\ud14c\uace0\ub9ac: negative\u003cbr\u003e\ub2e8\uc5b4: \ubb38\uc81c"}, {"color": "#4444ff", "font": {"color": "white"}, "id": "\uc11c\ube44\uc2a4", "label": "\uc11c\ube44\uc2a4", "shape": "dot", "size": 25, "title": "\uce74\ud14c\uace0\ub9ac: service\u003cbr\u003e\ub2e8\uc5b4: \uc11c\ube44\uc2a4"}, {"color": "#4444ff", "font": {"color": "white"}, "id": "\ud488\uc9c8", "label": "\ud488\uc9c8", "shape": "dot", "size": 25, "title": "\uce74\ud14c\uace0\ub9ac: service\u003cbr\u003e\ub2e8\uc5b4: \ud488\uc9c8"}, {"color": "#ffaa44", "font": {"color": "white"}, "id": "\uac00\uaca9", "label": "\uac00\uaca9", "shape": "dot", "size": 20, "title": "\uce74\ud14c\uace0\ub9ac: neutral\u003cbr\u003e\ub2e8\uc5b4: \uac00\uaca9"}, {"color": "#6666ff", "font": {"color": "white"}, "id": "\uc9c1\uc6d0", "label": "\uc9c1\uc6d0", "shape": "dot", "size": 20, "title": "\uce74\ud14c\uace0\ub9ac: service\u003cbr\u003e\ub2e8\uc5b4: \uc9c1\uc6d0"}, {"color": "#ffff44", "font": {"color": "white"}, "id": "\uace0\uac1d", "label": "\uace0\uac1d", "shape": "dot", "size": 25, "title": "\uce74\ud14c\uace0\ub9ac: neutral\u003cbr\u003e\ub2e8\uc5b4: \uace0\uac1d"}, {"color": "#44ff44", "font": {"color": "white"}, "id": "\ucc98\ub9ac", "label": "\ucc98\ub9ac", "shape": "dot", "size": 20, "title": "\uce74\ud14c\uace0\ub9ac: solution\u003cbr\u003e\ub2e8\uc5b4: \ucc98\ub9ac"}, {"color": "#44ff44", "font": {"color": "white"}, "id": "\uac1c\uc120", "label": "\uac1c\uc120", "shape": "dot", "size": 25, "title": "\uce74\ud14c\uace0\ub9ac: solution\u003cbr\u003e\ub2e8\uc5b4: \uac1c\uc120"}, {"color": "#cccccc", "font": {"color": "white"}, "id": "\uc694\uccad", "label": "\uc694\uccad", "shape": "dot", "size": 15, "title": "\uce74\ud14c\uace0\ub9ac: other\u003cbr\u003e\ub2e8\uc5b4: \uc694\uccad"}, {"color": "#cccccc", "font": {"color": "white"}, "id": "\uc9c0\uc5f0", "label": "\uc9c0\uc5f0", "shape": "dot", "size": 15, "title": "\uce74\ud14c\uace0\ub9ac: other\u003cbr\u003e\ub2e8\uc5b4: \uc9c0\uc5f0"}, {"color": "#ff4444", "font": {"color": "white"}, "id": "\uc624\ub958", "label": "\uc624\ub958", "shape": "dot", "size": 20, "title": "\uce74\ud14c\uace0\ub9ac: negative\u003cbr\u003e\ub2e8\uc5b4: \uc624\ub958"}, {"color": "#ff4444", "font": {"color": "white"}, "id": "\uc190\uc0c1", "label": "\uc190\uc0c1", "shape": "dot", "size": 20, "title": "\uce74\ud14c\uace0\ub9ac: negative\u003cbr\u003e\ub2e8\uc5b4: \uc190\uc0c1"}, {"color": "#cccccc", "font": {"color": "white"}, "id": "\ud658\ubd88", "label": "\ud658\ubd88", "shape": "dot", "size": 15, "title": "\uce74\ud14c\uace0\ub9ac: other\u003cbr\u003e\ub2e8\uc5b4: \ud658\ubd88"}, {"color": "#cccccc", "font": {"color": "white"}, "id": "\uad50\ud658", "label": "\uad50\ud658", "shape": "dot", "size": 15, "title": "\uce74\ud14c\uace0\ub9ac: other\u003cbr\u003e\ub2e8\uc5b4: \uad50\ud658"}, {"color": "#66ff66", "font": {"color": "white"}, "id": "\uc218\ub9ac", "label": "\uc218\ub9ac", "shape": "dot", "size": 15, "title": "\uce74\ud14c\uace0\ub9ac: solution\u003cbr\u003e\ub2e8\uc5b4: \uc218\ub9ac"}, {"color": "#cccccc", "font": {"color": "white"}, "id": "\ubc18\ud488", "label": "\ubc18\ud488", "shape": "dot", "size": 15, "title": "\uce74\ud14c\uace0\ub9ac: other\u003cbr\u003e\ub2e8\uc5b4: \ubc18\ud488"}, {"color": "#ffaa44", "font": {"color": "white"}, "id": "\uc0c1\ud488", "label": "\uc0c1\ud488", "shape": "dot", "size": 20, "title": "\uce74\ud14c\uace0\ub9ac: neutral\u003cbr\u003e\ub2e8\uc5b4: \uc0c1\ud488"}, {"color": "#ffaa44", "font": {"color": "white"}, "id": "\uc81c\ud488", "label": "\uc81c\ud488", "shape": "dot", "size": 20, "title": "\uce74\ud14c\uace0\ub9ac: neutral\u003cbr\u003e\ub2e8\uc5b4: \uc81c\ud488"}, {"color": "#44ffaa", "font": {"color": "white"}, "id": "\ub9cc\uc871", "label": "\ub9cc\uc871", "shape": "dot", "size": 20, "title": "\uce74\ud14c\uace0\ub9ac: positive\u003cbr\u003e\ub2e8\uc5b4: \ub9cc\uc871"}, {"color": "#ff6666", "font": {"color": "white"}, "id": "\uc2e4\ub9dd", "label": "\uc2e4\ub9dd", "shape": "dot", "size": 20, "title": "\uce74\ud14c\uace0\ub9ac: negative\u003cbr\u003e\ub2e8\uc5b4: \uc2e4\ub9dd"}, {"color": "#ff6666", "font": {"color": "white"}, "id": "\ubd88\ud3b8", "label": "\ubd88\ud3b8", "shape": "dot", "size": 20, "title": "\uce74\ud14c\uace0\ub9ac: negative\u003cbr\u003e\ub2e8\uc5b4: \ubd88\ud3b8"}, {"color": "#ff6666", "font": {"color": "white"}, "id": "\ub2f5\ub2f5", "label": "\ub2f5\ub2f5", "shape": "dot", "size": 15, "title": "\uce74\ud14c\uace0\ub9ac: negative\u003cbr\u003e\ub2e8\uc5b4: \ub2f5\ub2f5"}]);
+                  edges = new vis.DataSet([{"color": "#4444ff", "from": "\ubd88\ub9cc", "length": 152.43610441684723, "title": "\ubd88\ub9cc \u2194 \ub9cc\uc871\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.238", "to": "\ub9cc\uc871", "width": 2.3781947791576385}, {"color": "#4444ff", "from": "\ubd88\ub9cc", "length": 101.22096538543701, "title": "\ubd88\ub9cc \u2194 \uc2e4\ub9dd\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.494", "to": "\uc2e4\ub9dd", "width": 4.938951730728149}, {"color": "#ffaa44", "from": "\ubd88\ub9cc", "length": 87.06624507904053, "title": "\ubd88\ub9cc \u2194 \ubd88\ud3b8\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.565", "to": "\ubd88\ud3b8", "width": 5.646687746047974}, {"color": "#4444ff", "from": "\ubd88\ub9cc", "length": 141.79121851921082, "title": "\ubd88\ub9cc \u2194 \ub2f5\ub2f5\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.291", "to": "\ub2f5\ub2f5", "width": 2.9104390740394592}, {"color": "#4444ff", "from": "\ubb38\uc81c", "length": 121.97384834289551, "title": "\ubb38\uc81c \u2194 \uc9c0\uc5f0\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.390", "to": "\uc9c0\uc5f0", "width": 3.9013075828552246}, {"color": "#ffaa44", "from": "\ubb38\uc81c", "length": 78.06828022003174, "title": "\ubb38\uc81c \u2194 \uc624\ub958\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.610", "to": "\uc624\ub958", "width": 6.096585988998413}, {"color": "#4444ff", "from": "\ubb38\uc81c", "length": 142.33030676841736, "title": "\ubb38\uc81c \u2194 \ubd88\ud3b8\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.288", "to": "\ubd88\ud3b8", "width": 2.883484661579132}, {"color": "#4444ff", "from": "\uc11c\ube44\uc2a4", "length": 115.82152247428894, "title": "\uc11c\ube44\uc2a4 \u2194 \uc0c1\ud488\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.421", "to": "\uc0c1\ud488", "width": 4.208923876285553}, {"color": "#4444ff", "from": "\ud488\uc9c8", "length": 148.75057339668274, "title": "\ud488\uc9c8 \u2194 \uac1c\uc120\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.256", "to": "\uac1c\uc120", "width": 2.562471330165863}, {"color": "#4444ff", "from": "\uac00\uaca9", "length": 150.33366680145264, "title": "\uac00\uaca9 \u2194 \uc190\uc0c1\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.248", "to": "\uc190\uc0c1", "width": 2.483316659927368}, {"color": "#4444ff", "from": "\uc9c1\uc6d0", "length": 134.9849820137024, "title": "\uc9c1\uc6d0 \u2194 \uad50\ud658\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.325", "to": "\uad50\ud658", "width": 3.2507508993148804}, {"color": "#4444ff", "from": "\uc9c1\uc6d0", "length": 155.72037398815155, "title": "\uc9c1\uc6d0 \u2194 \uc218\ub9ac\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.221", "to": "\uc218\ub9ac", "width": 2.2139813005924225}, {"color": "#4444ff", "from": "\uc9c1\uc6d0", "length": 121.70107960700989, "title": "\uc9c1\uc6d0 \u2194 \ubc18\ud488\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.391", "to": "\ubc18\ud488", "width": 3.9149460196495056}, {"color": "#4444ff", "from": "\uc9c1\uc6d0", "length": 141.40658378601074, "title": "\uc9c1\uc6d0 \u2194 \uc81c\ud488\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.293", "to": "\uc81c\ud488", "width": 2.929670810699463}, {"color": "#4444ff", "from": "\ucc98\ub9ac", "length": 147.0606803894043, "title": "\ucc98\ub9ac \u2194 \uac1c\uc120\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.265", "to": "\uac1c\uc120", "width": 2.646965980529785}, {"color": "#4444ff", "from": "\ucc98\ub9ac", "length": 111.69717907905579, "title": "\ucc98\ub9ac \u2194 \uc694\uccad\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.442", "to": "\uc694\uccad", "width": 4.415141046047211}, {"color": "#4444ff", "from": "\ucc98\ub9ac", "length": 151.00804567337036, "title": "\ucc98\ub9ac \u2194 \uc9c0\uc5f0\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.245", "to": "\uc9c0\uc5f0", "width": 2.449597716331482}, {"color": "#4444ff", "from": "\ucc98\ub9ac", "length": 153.90097498893738, "title": "\ucc98\ub9ac \u2194 \ud658\ubd88\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.230", "to": "\ud658\ubd88", "width": 2.304951250553131}, {"color": "#4444ff", "from": "\ucc98\ub9ac", "length": 157.11655616760254, "title": "\ucc98\ub9ac \u2194 \uad50\ud658\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.214", "to": "\uad50\ud658", "width": 2.144172191619873}, {"color": "#4444ff", "from": "\uac1c\uc120", "length": 159.93523001670837, "title": "\uac1c\uc120 \u2194 \uc9c0\uc5f0\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.200", "to": "\uc9c0\uc5f0", "width": 2.0032384991645813}, {"color": "#4444ff", "from": "\uac1c\uc120", "length": 148.96851181983948, "title": "\uac1c\uc120 \u2194 \ub9cc\uc871\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.255", "to": "\ub9cc\uc871", "width": 2.551574409008026}, {"color": "#4444ff", "from": "\uc694\uccad", "length": 154.86023724079132, "title": "\uc694\uccad \u2194 \uc9c0\uc5f0\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.226", "to": "\uc9c0\uc5f0", "width": 2.256988137960434}, {"color": "#4444ff", "from": "\uc694\uccad", "length": 148.92793893814087, "title": "\uc694\uccad \u2194 \ud658\ubd88\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.255", "to": "\ud658\ubd88", "width": 2.5536030530929565}, {"color": "#4444ff", "from": "\uc694\uccad", "length": 155.94558119773865, "title": "\uc694\uccad \u2194 \uad50\ud658\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.220", "to": "\uad50\ud658", "width": 2.2027209401130676}, {"color": "#4444ff", "from": "\uc694\uccad", "length": 154.16274666786194, "title": "\uc694\uccad \u2194 \ubc18\ud488\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.229", "to": "\ubc18\ud488", "width": 2.291862666606903}, {"color": "#ffaa44", "from": "\uc9c0\uc5f0", "length": 72.3229169845581, "title": "\uc9c0\uc5f0 \u2194 \uc624\ub958\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.638", "to": "\uc624\ub958", "width": 6.383854150772095}, {"color": "#4444ff", "from": "\uc9c0\uc5f0", "length": 140.1240050792694, "title": "\uc9c0\uc5f0 \u2194 \uc190\uc0c1\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.299", "to": "\uc190\uc0c1", "width": 2.9937997460365295}, {"color": "#4444ff", "from": "\uc624\ub958", "length": 145.95019221305847, "title": "\uc624\ub958 \u2194 \uc190\uc0c1\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.270", "to": "\uc190\uc0c1", "width": 2.7024903893470764}, {"color": "#4444ff", "from": "\uc190\uc0c1", "length": 110.65810918807983, "title": "\uc190\uc0c1 \u2194 \uad50\ud658\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.447", "to": "\uad50\ud658", "width": 4.467094540596008}, {"color": "#4444ff", "from": "\uc190\uc0c1", "length": 105.2706778049469, "title": "\uc190\uc0c1 \u2194 \uc218\ub9ac\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.474", "to": "\uc218\ub9ac", "width": 4.736466109752655}, {"color": "#4444ff", "from": "\uc190\uc0c1", "length": 138.40734958648682, "title": "\uc190\uc0c1 \u2194 \ubc18\ud488\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.308", "to": "\ubc18\ud488", "width": 3.079632520675659}, {"color": "#4444ff", "from": "\uc190\uc0c1", "length": 137.57954239845276, "title": "\uc190\uc0c1 \u2194 \uc81c\ud488\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.312", "to": "\uc81c\ud488", "width": 3.121022880077362}, {"color": "#4444ff", "from": "\ud658\ubd88", "length": 131.49102926254272, "title": "\ud658\ubd88 \u2194 \uad50\ud658\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.343", "to": "\uad50\ud658", "width": 3.4254485368728638}, {"color": "#4444ff", "from": "\ud658\ubd88", "length": 155.63905239105225, "title": "\ud658\ubd88 \u2194 \uc218\ub9ac\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.222", "to": "\uc218\ub9ac", "width": 2.2180473804473877}, {"color": "#4444ff", "from": "\ud658\ubd88", "length": 127.70110964775085, "title": "\ud658\ubd88 \u2194 \ubc18\ud488\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.361", "to": "\ubc18\ud488", "width": 3.6149445176124573}, {"color": "#4444ff", "from": "\uad50\ud658", "length": 121.55722379684448, "title": "\uad50\ud658 \u2194 \uc218\ub9ac\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.392", "to": "\uc218\ub9ac", "width": 3.922138810157776}, {"color": "#ffaa44", "from": "\uad50\ud658", "length": 64.75566625595093, "title": "\uad50\ud658 \u2194 \ubc18\ud488\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.676", "to": "\ubc18\ud488", "width": 6.762216687202454}, {"color": "#4444ff", "from": "\uad50\ud658", "length": 118.4555172920227, "title": "\uad50\ud658 \u2194 \uc81c\ud488\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.408", "to": "\uc81c\ud488", "width": 4.077224135398865}, {"color": "#4444ff", "from": "\uc218\ub9ac", "length": 118.68487000465393, "title": "\uc218\ub9ac \u2194 \ubc18\ud488\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.407", "to": "\ubc18\ud488", "width": 4.0657564997673035}, {"color": "#4444ff", "from": "\uc218\ub9ac", "length": 153.64336669445038, "title": "\uc218\ub9ac \u2194 \uc81c\ud488\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.232", "to": "\uc81c\ud488", "width": 2.317831665277481}, {"color": "#4444ff", "from": "\ubc18\ud488", "length": 119.52781081199646, "title": "\ubc18\ud488 \u2194 \uc81c\ud488\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.402", "to": "\uc81c\ud488", "width": 4.023609459400177}, {"color": "#4444ff", "from": "\uc0c1\ud488", "length": 105.45141696929932, "title": "\uc0c1\ud488 \u2194 \uc81c\ud488\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.473", "to": "\uc81c\ud488", "width": 4.727429151535034}, {"color": "#4444ff", "from": "\ub9cc\uc871", "length": 111.67368292808533, "title": "\ub9cc\uc871 \u2194 \uc2e4\ub9dd\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.442", "to": "\uc2e4\ub9dd", "width": 4.416315853595734}, {"color": "#4444ff", "from": "\ub9cc\uc871", "length": 153.3274084329605, "title": "\ub9cc\uc871 \u2194 \ubd88\ud3b8\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.233", "to": "\ubd88\ud3b8", "width": 2.3336295783519745}, {"color": "#4444ff", "from": "\uc2e4\ub9dd", "length": 152.250075340271, "title": "\uc2e4\ub9dd \u2194 \ubd88\ud3b8\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.239", "to": "\ubd88\ud3b8", "width": 2.38749623298645}, {"color": "#4444ff", "from": "\uc2e4\ub9dd", "length": 131.84499144554138, "title": "\uc2e4\ub9dd \u2194 \ub2f5\ub2f5\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.341", "to": "\ub2f5\ub2f5", "width": 3.407750427722931}, {"color": "#4444ff", "from": "\ubd88\ud3b8", "length": 138.02999258041382, "title": "\ubd88\ud3b8 \u2194 \ub2f5\ub2f5\u003cbr\u003e\uc720\uc0ac\ub3c4: 0.310", "to": "\ub2f5\ub2f5", "width": 3.098500370979309}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {"physics": {"enabled": true, "forceAtlas2Based": {"gravitationalConstant": -50, "centralGravity": 0.01, "springLength": 100, "springConstant": 0.08, "damping": 0.4, "avoidOverlap": 0.5}, "maxVelocity": 50, "minVelocity": 0.1, "solver": "forceAtlas2Based", "stabilization": {"enabled": true, "iterations": 500, "updateInterval": 25}}, "edges": {"smooth": {"enabled": true, "type": "continuous"}}};
+
+                  
+
+
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>

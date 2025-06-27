@@ -1,0 +1,22 @@
+node_id,node_label,color,shape,size,title
+불만,불만,#ff4444,dot,30,카테고리: negative<br>단어: 불만
+문제,문제,#ff4444,dot,25,카테고리: negative<br>단어: 문제
+서비스,서비스,#4444ff,dot,25,카테고리: service<br>단어: 서비스
+품질,품질,#4444ff,dot,25,카테고리: service<br>단어: 품질
+배송,배송,#6666ff,dot,20,카테고리: service<br>단어: 배송
+가격,가격,#ffaa44,dot,20,카테고리: neutral<br>단어: 가격
+직원,직원,#6666ff,dot,20,카테고리: service<br>단어: 직원
+고객,고객,#ffff44,dot,25,카테고리: neutral<br>단어: 고객
+처리,처리,#44ff44,dot,20,카테고리: solution<br>단어: 처리
+개선,개선,#44ff44,dot,25,카테고리: solution<br>단어: 개선
+지연,지연,#cccccc,dot,15,카테고리: other<br>단어: 지연
+오류,오류,#ff4444,dot,20,카테고리: negative<br>단어: 오류
+손상,손상,#ff4444,dot,20,카테고리: negative<br>단어: 손상
+환불,환불,#cccccc,dot,15,카테고리: other<br>단어: 환불
+교환,교환,#cccccc,dot,15,카테고리: other<br>단어: 교환
+수리,수리,#66ff66,dot,15,카테고리: solution<br>단어: 수리
+반품,반품,#cccccc,dot,15,카테고리: other<br>단어: 반품
+상품,상품,#ffaa44,dot,20,카테고리: neutral<br>단어: 상품
+제품,제품,#ffaa44,dot,20,카테고리: neutral<br>단어: 제품
+실망,실망,#ff6666,dot,20,카테고리: negative<br>단어: 실망
+불편,불편,#ff6666,dot,20,카테고리: negative<br>단어: 불편

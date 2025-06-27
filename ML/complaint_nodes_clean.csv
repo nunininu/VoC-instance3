@@ -1,0 +1,7 @@
+id,label,category,size
+품질,품질,service,25
+서비스,서비스,service,25
+불만,불만,negative,30
+개선,개선,solution,25
+고객,고객,neutral,25
+만족,만족,positive,20

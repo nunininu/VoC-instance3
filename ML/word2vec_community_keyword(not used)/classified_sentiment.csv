@@ -1,0 +1,41 @@
+import pandas as pd
+import networkx as nx
+
+print("🔹[1] CSV 파일 로드")
+df = pd.read_csv("keyword_edge_cleaned.csv")
+print(f"🔹[1] 로드 완료: {len(df)}행")
+
+print("🔹[2] 그래프 생성 시작 (가중치 컬럼: similarity)")
+G = nx.DiGraph()
+for _, row in df.iterrows():
+    G.add_edge(row["source"], row["target"], weight=row["similarity"])
+print(f"🔹[2] 생성된 엣지 수: {len(G.edges())}")
+
+print("🔹[3] 사이클 제거 (SCC 기반)")
+removed_edges = set()
+sccs = list(nx.strongly_connected_components(G))
+for scc in sccs:
+    if len(scc) > 1:
+        subgraph = G.subgraph(scc).copy()
+        # 엣지 가중치 기준 정렬 (내림차순)
+        edges_sorted = sorted(subgraph.edges(data=True), key=lambda x: x[2]["weight"], reverse=True)
+        # 가장 가중치 큰 엣지 하나 제거
+        for u, v, _ in edges_sorted:
+            if G.has_edge(u, v):
+                G.remove_edge(u, v)
+                removed_edges.add((u, v))
+                break
+
+print(f"🔹[3] 제거된 엣지 수: {len(removed_edges)}")
+
+# 추가로 DAG 확인
+is_dag = nx.is_directed_acyclic_graph(G)
+print(f"🔹[4] DAG 만족 여부: {is_dag}")
+
+print("🔹[5] 결과 저장")
+acyclic_edges = pd.DataFrame(
+    [(u, v, G[u][v]["weight"]) for u, v in G.edges()],
+    columns=["source", "target", "similarity"]
+)
+acyclic_edges.to_csv("keyword_edge_acyclic.csv", index=False)
+print("✅ 완료: keyword_edge_acyclic.csv 저장됨")
